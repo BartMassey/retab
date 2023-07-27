@@ -39,6 +39,9 @@ def detab_line(line):
             result += ' '*m
             p += m
             continue
+        if not args.full:
+            result += line[i:]
+            return result
         result += line[i]
         p += 1
     return result
@@ -62,9 +65,6 @@ def entab_line(line):
     return result
 
 if program == "detab":
-    if args.full:
-        print("detab: --full not allowed", file=stderr)
-        exit(1)
     tabf = detab_line
 elif program == "entab":
     tabf = entab_line
