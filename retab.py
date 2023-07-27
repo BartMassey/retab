@@ -19,6 +19,7 @@ parser.add_argument('-e', '--edit-file', action='store_true')
 parser.add_argument('--edit-dir')
 parser.add_argument('-4', '--four-space', action='store_true')
 parser.add_argument('--full', action='store_true')
+parser.add_argument('--trim', action='store_true')
 args = parser.parse_args()
 
 if args.entab:
@@ -31,6 +32,8 @@ if args.four_space:
     tabwidth = 4
 
 def detab_line(line):
+    if args.trim:
+        line = line.rstrip()
     result = ""
     p = 0
     for i in range(len(line)):
@@ -47,6 +50,8 @@ def detab_line(line):
     return result
 
 def entab_line(line):
+    if args.trim:
+        line = line.rstrip()
     result = ""
     for i in range(0, len(line), tabwidth):
         segment = line[i:i+tabwidth]
