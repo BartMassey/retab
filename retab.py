@@ -42,6 +42,10 @@ def detab_line(line):
             result += ' '*m
             p += m
             continue
+        elif line[i] == ' ':
+            result += ' '
+            p += 1
+            continue
         if not args.full:
             result += line[i:]
             return result
